@@ -1,0 +1,101 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voice-sentiment-analyzer"
+version = "1.0.0"
+description = "A comprehensive web-based application for analyzing customer sentiment from voice and text feedback"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Voice Sentiment Analyzer Team", email = "contact@example.com"}
+]
+maintainers = [
+    {name = "Voice Sentiment Analyzer Team", email = "contact@example.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Business",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+keywords = ["sentiment analysis", "voice recognition", "nlp", "streamlit", "customer feedback"]
+dependencies = [
+    "streamlit>=1.28.0",
+    "pandas>=1.5.0",
+    "plotly>=5.15.0",
+    "textblob>=0.17.1",
+    "vaderSentiment>=3.3.2",
+    "SpeechRecognition>=3.10.0",
+    "numpy>=1.24.0",
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "isort",
+    "pytest",
+    "pytest-cov",
+    "bandit",
+    "safety",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/voice-sentiment-analyzer"
+Documentation = "https://github.com/your-username/voice-sentiment-analyzer#readme"
+Repository = "https://github.com/your-username/voice-sentiment-analyzer"
+"Bug Tracker" = "https://github.com/your-username/voice-sentiment-analyzer/issues"
+
+[project.scripts]
+voice-sentiment-analyzer = "app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["src"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+    "venv",
+]

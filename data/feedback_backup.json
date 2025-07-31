@@ -1,0 +1,104 @@
+[
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "the shoes fit perfectly I love it",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-07-31T08:21:47.510748",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.5563028571428572,
+      "textblob_sentiment": 0.45,
+      "vader_sentiment": 0.8979,
+      "keyword_sentiment": 0.08571428571428572,
+      "subjectivity": 0.5,
+      "confidence": 0.6678413822479706,
+      "text_length": 33,
+      "word_count": 7
+    }
+  },
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "I got a different shape from what I ordered",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-07-31T08:22:18.972733",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.0,
+      "textblob_sentiment": 0.0,
+      "vader_sentiment": 0.0,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.6,
+      "confidence": 1.0,
+      "text_length": 43,
+      "word_count": 9
+    }
+  },
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "I got something different from what I ordered and frustrating I don't like it",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-07-31T08:22:44.972120",
+    "sentiment_analysis": {
+      "overall_sentiment": -0.32544000000000006,
+      "textblob_sentiment": -0.2,
+      "vader_sentiment": -0.6136,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.75,
+      "confidence": 0.744489634913441,
+      "text_length": 77,
+      "word_count": 14
+    }
+  },
+  {
+    "product_id": "prod_001",
+    "product_name": "Wireless Bluetooth Headphones",
+    "feedback_text": "These headphones are absolutely amazing! Great sound quality.",
+    "input_method": "Text Input",
+    "timestamp": "2025-07-31T08:24:18.561045",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.6446200000000001,
+      "textblob_sentiment": 0.65,
+      "vader_sentiment": 0.8678,
+      "keyword_sentiment": 0.1875,
+      "subjectivity": 0.6833333333333332,
+      "confidence": 0.7163430906495979,
+      "text_length": 61,
+      "word_count": 8
+    }
+  },
+  {
+    "product_id": "prod_002",
+    "product_name": "Smartphone Case",
+    "feedback_text": "The phone case is okay, nothing special but does the job.",
+    "input_method": "Text Input",
+    "timestamp": "2025-07-31T08:24:18.567058",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.15294857142857146,
+      "textblob_sentiment": 0.4285714285714286,
+      "vader_sentiment": -0.0462,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.5357142857142857,
+      "confidence": 0.7862462946973497,
+      "text_length": 57,
+      "word_count": 11
+    }
+  },
+  {
+    "product_id": "prod_003",
+    "product_name": "Coffee Maker",
+    "feedback_text": "Coffee maker broke after one week. Very disappointed.",
+    "input_method": "Text Input",
+    "timestamp": "2025-07-31T08:24:18.572740",
+    "sentiment_analysis": {
+      "overall_sentiment": -0.6988400000000001,
+      "textblob_sentiment": -0.9750000000000001,
+      "vader_sentiment": -0.7346,
+      "keyword_sentiment": -0.075,
+      "subjectivity": 0.9750000000000001,
+      "confidence": 0.6195230595394483,
+      "text_length": 53,
+      "word_count": 8
+    }
+  }
+]
