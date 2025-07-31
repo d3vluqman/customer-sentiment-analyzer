@@ -217,7 +217,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 📖 [Documentation](README.md)
 - 🐛 [Report Issues](https://github.com/your-username/voice-sentiment-analyzer/issues)
 - 💬 [Discussions](https://github.com/your-username/voice-sentiment-analyzer/discussions)
-- 📧 Contact: [your-email@example.com](mailto:your-email@example.com)
+- 📧 Contact: [luqmanabdulwasii@gmail.com](mailto:your-email@example.com)
 
 ---
 
