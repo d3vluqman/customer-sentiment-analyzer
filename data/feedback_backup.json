@@ -100,5 +100,345 @@
       "text_length": 53,
       "word_count": 8
     }
+  },
+  {
+    "product_id": "prod_001",
+    "product_name": "Wireless Bluetooth Headphones",
+    "feedback_text": "Amazing sound quality! Love these headphones.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-24T11:46:15.948314",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.6073066666666668,
+      "textblob_sentiment": 0.5333333333333333,
+      "vader_sentiment": 0.8516,
+      "keyword_sentiment": 0.26666666666666666,
+      "subjectivity": 0.6333333333333333,
+      "confidence": 0.7608924494275835,
+      "text_length": 45,
+      "word_count": 6
+    }
+  },
+  {
+    "product_id": "prod_001",
+    "product_name": "Wireless Bluetooth Headphones",
+    "feedback_text": "Great noise cancellation, perfect for work.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-23T11:46:15.964364",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.7359733333333335,
+      "textblob_sentiment": 0.9,
+      "vader_sentiment": 0.8316,
+      "keyword_sentiment": 0.21666666666666667,
+      "subjectivity": 0.875,
+      "confidence": 0.6927241541674667,
+      "text_length": 43,
+      "word_count": 6
+    }
+  },
+  {
+    "product_id": "prod_001",
+    "product_name": "Wireless Bluetooth Headphones",
+    "feedback_text": "Battery life could be better, but overall good.",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-23T11:46:15.986594",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.4501200000000001,
+      "textblob_sentiment": 0.39999999999999997,
+      "vader_sentiment": 0.7003,
+      "keyword_sentiment": 0.05,
+      "subjectivity": 0.3666666666666667,
+      "confidence": 0.7342578149994079,
+      "text_length": 47,
+      "word_count": 8
+    }
+  },
+  {
+    "product_id": "prod_001",
+    "product_name": "Wireless Bluetooth Headphones",
+    "feedback_text": "Excellent build quality and comfort.",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-25T11:46:16.005536",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.73804,
+      "textblob_sentiment": 1.0,
+      "vader_sentiment": 0.7351,
+      "keyword_sentiment": 0.22000000000000003,
+      "subjectivity": 1.0,
+      "confidence": 0.6761516095454541,
+      "text_length": 36,
+      "word_count": 5
+    }
+  },
+  {
+    "product_id": "prod_001",
+    "product_name": "Wireless Bluetooth Headphones",
+    "feedback_text": "Best headphones I've ever owned!",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-22T11:46:16.031413",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.66784,
+      "textblob_sentiment": 1.0,
+      "vader_sentiment": 0.6696,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.3,
+      "confidence": 0.5839967521494307,
+      "text_length": 32,
+      "word_count": 5
+    }
+  },
+  {
+    "product_id": "prod_002",
+    "product_name": "Smartphone Case",
+    "feedback_text": "Perfect fit for my phone, great protection.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-20T11:46:16.052007",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.6838361904761905,
+      "textblob_sentiment": 0.7333333333333334,
+      "vader_sentiment": 0.8834,
+      "keyword_sentiment": 0.18571428571428572,
+      "subjectivity": 0.7166666666666667,
+      "confidence": 0.700153375933257,
+      "text_length": 43,
+      "word_count": 7
+    }
+  },
+  {
+    "product_id": "prod_002",
+    "product_name": "Smartphone Case",
+    "feedback_text": "Case is okay, nothing special.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-21T11:46:16.080045",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.13462857142857146,
+      "textblob_sentiment": 0.4285714285714286,
+      "vader_sentiment": -0.092,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.5357142857142857,
+      "confidence": 0.7731539725245207,
+      "text_length": 30,
+      "word_count": 5
+    }
+  },
+  {
+    "product_id": "prod_002",
+    "product_name": "Smartphone Case",
+    "feedback_text": "Dropped my phone multiple times, case saved it!",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-24T11:46:16.105807",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.19012,
+      "textblob_sentiment": 0.0,
+      "vader_sentiment": 0.4753,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.0,
+      "confidence": 0.7759414312680226,
+      "text_length": 47,
+      "word_count": 8
+    }
+  },
+  {
+    "product_id": "prod_002",
+    "product_name": "Smartphone Case",
+    "feedback_text": "Good value for money.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-25T11:46:16.125804",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.5594399999999999,
+      "textblob_sentiment": 0.7,
+      "vader_sentiment": 0.6486,
+      "keyword_sentiment": 0.1,
+      "subjectivity": 0.6000000000000001,
+      "confidence": 0.7284603732622275,
+      "text_length": 21,
+      "word_count": 4
+    }
+  },
+  {
+    "product_id": "prod_003",
+    "product_name": "Coffee Maker",
+    "feedback_text": "Makes terrible coffee, very disappointed.",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-20T11:46:16.155367",
+    "sentiment_analysis": {
+      "overall_sentiment": -0.75396,
+      "textblob_sentiment": -0.9875,
+      "vader_sentiment": -0.7574,
+      "keyword_sentiment": -0.27999999999999997,
+      "subjectivity": 0.9875,
+      "confidence": 0.7053414367630072,
+      "text_length": 41,
+      "word_count": 5
+    }
+  },
+  {
+    "product_id": "prod_003",
+    "product_name": "Coffee Maker",
+    "feedback_text": "Broke after just one week of use.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-25T11:46:16.177481",
+    "sentiment_analysis": {
+      "overall_sentiment": -0.1686,
+      "textblob_sentiment": 0.0,
+      "vader_sentiment": -0.4215,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.0,
+      "confidence": 0.8013029944865802,
+      "text_length": 33,
+      "word_count": 7
+    }
+  },
+  {
+    "product_id": "prod_003",
+    "product_name": "Coffee Maker",
+    "feedback_text": "Coffee tastes great, easy to use.",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-26T11:46:16.218946",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.5795733333333334,
+      "textblob_sentiment": 0.6166666666666667,
+      "vader_sentiment": 0.7906,
+      "keyword_sentiment": 0.08333333333333333,
+      "subjectivity": 0.7916666666666667,
+      "confidence": 0.6990896429782402,
+      "text_length": 33,
+      "word_count": 6
+    }
+  },
+  {
+    "product_id": "prod_003",
+    "product_name": "Coffee Maker",
+    "feedback_text": "Good coffee maker for the price.",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-22T11:46:16.262848",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.4694933333333333,
+      "textblob_sentiment": 0.7,
+      "vader_sentiment": 0.4404,
+      "keyword_sentiment": 0.06666666666666667,
+      "subjectivity": 0.6000000000000001,
+      "confidence": 0.7400470393929027,
+      "text_length": 32,
+      "word_count": 6
+    }
+  },
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "Super comfortable for long runs!",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-22T11:46:16.295481",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.4163244444444445,
+      "textblob_sentiment": 0.22361111111111112,
+      "vader_sentiment": 0.8172,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.6222222222222222,
+      "confidence": 0.6551706479970948,
+      "text_length": 32,
+      "word_count": 5
+    }
+  },
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "Great cushioning and support.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-19T11:46:16.347614",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.6563200000000001,
+      "textblob_sentiment": 0.8,
+      "vader_sentiment": 0.7783,
+      "keyword_sentiment": 0.125,
+      "subjectivity": 0.75,
+      "confidence": 0.6867913758814705,
+      "text_length": 29,
+      "word_count": 4
+    }
+  },
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "Perfect fit, highly recommend.",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-26T11:46:16.400806",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.60896,
+      "textblob_sentiment": 0.5199999999999999,
+      "vader_sentiment": 0.8399,
+      "keyword_sentiment": 0.325,
+      "subjectivity": 0.6466666666666666,
+      "confidence": 0.7877415045542608,
+      "text_length": 30,
+      "word_count": 4
+    }
+  },
+  {
+    "product_id": "prod_004",
+    "product_name": "Running Shoes",
+    "feedback_text": "Best running shoes ever!",
+    "input_method": "Text Input",
+    "timestamp": "2025-08-24T11:46:16.431795",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.66784,
+      "textblob_sentiment": 1.0,
+      "vader_sentiment": 0.6696,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.3,
+      "confidence": 0.5839967521494307,
+      "text_length": 24,
+      "word_count": 4
+    }
+  },
+  {
+    "product_id": "prod_005",
+    "product_name": "Laptop Stand",
+    "feedback_text": "Improved my posture significantly.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-26T11:46:16.451274",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.34068000000000004,
+      "textblob_sentiment": 0.375,
+      "vader_sentiment": 0.4767,
+      "keyword_sentiment": 0.0,
+      "subjectivity": 0.875,
+      "confidence": 0.7950038536947585,
+      "text_length": 34,
+      "word_count": 4
+    }
+  },
+  {
+    "product_id": "prod_005",
+    "product_name": "Laptop Stand",
+    "feedback_text": "Sturdy and adjustable, great quality.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-19T11:46:16.474366",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.60196,
+      "textblob_sentiment": 0.8,
+      "vader_sentiment": 0.6249,
+      "keyword_sentiment": 0.16,
+      "subjectivity": 0.75,
+      "confidence": 0.7299399202646444,
+      "text_length": 37,
+      "word_count": 5
+    }
+  },
+  {
+    "product_id": "prod_005",
+    "product_name": "Laptop Stand",
+    "feedback_text": "Perfect height for my setup.",
+    "input_method": "Voice Recording",
+    "timestamp": "2025-08-25T11:46:16.498824",
+    "sentiment_analysis": {
+      "overall_sentiment": 0.66076,
+      "textblob_sentiment": 1.0,
+      "vader_sentiment": 0.5719,
+      "keyword_sentiment": 0.16,
+      "subjectivity": 1.0,
+      "confidence": 0.6570501785975097,
+      "text_length": 28,
+      "word_count": 5
+    }
   }
 ]
