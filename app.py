@@ -39,6 +39,12 @@ def main():
     st.title("🎤 Voice Sentiment Analyzer")
     st.markdown("Analyze customer sentiment from voice recordings and text feedback")
 
+    # Initialize session state
+    if "selected_product_id" not in st.session_state:
+        st.session_state.selected_product_id = None
+    if "current_page" not in st.session_state:
+        st.session_state.current_page = "Feedback Collection"
+
     # Initialize components
     sentiment_analyzer, product_catalog, data_manager, audio_processor = (
         initialize_components()
@@ -46,15 +52,43 @@ def main():
 
     # Sidebar navigation
     st.sidebar.title("Navigation")
+
+    # Check if we should show product analytics
+    if st.session_state.selected_product_id:
+        products = product_catalog.get_products()
+        selected_product = products.get(st.session_state.selected_product_id)
+        if selected_product:
+            st.sidebar.info(
+                f"📊 Viewing analytics for:\n**{selected_product['name']}**"
+            )
+            if st.sidebar.button("← Back to Catalog"):
+                st.session_state.selected_product_id = None
+                st.session_state.current_page = "Product Catalog"
+                st.rerun()
+
+    # Main navigation
+    page_options = [
+        "Feedback Collection",
+        "Analytics Dashboard",
+        "Product Catalog",
+        "Data Management",
+    ]
+
+    # Add product analytics option if a product is selected
+    if st.session_state.selected_product_id:
+        page_options.insert(2, "Product Analytics")
+        default_page = "Product Analytics"
+    else:
+        default_page = st.session_state.current_page
+
     page = st.sidebar.selectbox(
         "Choose a page",
-        [
-            "Feedback Collection",
-            "Analytics Dashboard",
-            "Product Catalog",
-            "Data Management",
-        ],
+        page_options,
+        index=page_options.index(default_page) if default_page in page_options else 0,
     )
+
+    # Update current page
+    st.session_state.current_page = page
 
     if page == "Feedback Collection":
         feedback_collection_page(
@@ -63,7 +97,9 @@ def main():
     elif page == "Analytics Dashboard":
         analytics_dashboard_page(data_manager)
     elif page == "Product Catalog":
-        product_catalog_page(product_catalog)
+        product_catalog_page(product_catalog, data_manager)
+    elif page == "Product Analytics":
+        product_analytics_page(data_manager, product_catalog)
     elif page == "Data Management":
         data_management_page(data_manager)
 
@@ -330,9 +366,12 @@ def analytics_dashboard_page(data_manager):
     st.dataframe(recent_df, use_container_width=True)
 
 
-def product_catalog_page(product_catalog):
+def product_catalog_page(product_catalog, data_manager):
     """Product catalog management interface"""
     st.header("🛍️ Product Catalog")
+    st.markdown(
+        "Browse products and click **View Analytics** to see sentiment analysis for each product."
+    )
 
     products = product_catalog.get_products()
 
@@ -369,8 +408,287 @@ def product_catalog_page(product_catalog):
             st.write(f"**{product['name']}**")
             st.write(f"Category: {product['category']}")
             st.write(f"Price: ${product['price']}")
-            st.write(f"ID: {product_id}")
+
+            # Get feedback count for this product
+            product_feedback = data_manager.get_feedback_by_product(product_id)
+            feedback_count = len(product_feedback)
+
+            if feedback_count > 0:
+                avg_sentiment = (
+                    sum(f["overall_sentiment"] for f in product_feedback)
+                    / feedback_count
+                )
+                sentiment_label = (
+                    "Positive"
+                    if avg_sentiment > 0.1
+                    else "Negative" if avg_sentiment < -0.1 else "Neutral"
+                )
+                st.write(
+                    f"📊 {feedback_count} reviews • {sentiment_label} ({avg_sentiment:.2f})"
+                )
+            else:
+                st.write("📊 No reviews yet")
+
+            # Analytics button
+            if st.button(f"📈 View Analytics", key=f"analytics_{product_id}"):
+                st.session_state.selected_product_id = product_id
+                st.session_state.current_page = "Product Analytics"
+                try:
+                    st.rerun()
+                except AttributeError:
+                    st.rerun()
+
             st.divider()
+
+
+def product_analytics_page(data_manager, product_catalog):
+    """Product-specific analytics interface"""
+    if not st.session_state.selected_product_id:
+        st.error("No product selected. Please go back to the Product Catalog.")
+        return
+
+    products = product_catalog.get_products()
+    product = products.get(st.session_state.selected_product_id)
+
+    if not product:
+        st.error("Product not found. Please go back to the Product Catalog.")
+        return
+
+    # Header with product info
+    col1, col2 = st.columns([1, 3])
+    with col1:
+        st.image(product.get("image", "https://via.placeholder.com/200"), width=150)
+    with col2:
+        st.title(f"📊 {product['name']} Analytics")
+        st.write(f"**Category:** {product['category']}")
+        st.write(f"**Price:** ${product['price']}")
+        st.write(f"**Description:** {product['description']}")
+
+    st.divider()
+
+    # Get product-specific feedback
+    product_feedback = data_manager.get_feedback_by_product(
+        st.session_state.selected_product_id
+    )
+
+    if not product_feedback:
+        st.info(
+            f"No feedback available for {product['name']} yet. Be the first to leave a review!"
+        )
+
+        # Quick feedback option
+        st.subheader("💬 Leave Feedback")
+        quick_feedback = st.text_area(
+            "Share your thoughts about this product:",
+            placeholder="What do you think about this product?",
+        )
+
+        if quick_feedback and st.button("Submit Feedback"):
+            from src.sentiment_analyzer import SentimentAnalyzer
+
+            analyzer = SentimentAnalyzer()
+            analysis = analyzer.analyze_sentiment(quick_feedback)
+
+            feedback_data = {
+                "product_id": st.session_state.selected_product_id,
+                "product_name": product["name"],
+                "feedback_text": quick_feedback,
+                "input_method": "Text Input",
+                "timestamp": datetime.now().isoformat(),
+                "sentiment_analysis": analysis,
+            }
+
+            data_manager.save_feedback(feedback_data)
+            st.success("Feedback submitted successfully!")
+            st.rerun()
+
+        return
+
+    # Convert to DataFrame for analysis
+    df = pd.DataFrame(product_feedback)
+    df["timestamp"] = pd.to_datetime(df["timestamp"], format="mixed")
+    df["sentiment_score"] = df.apply(lambda x: x.get("overall_sentiment", 0), axis=1)
+    df["confidence"] = df.apply(lambda x: x.get("confidence", 0), axis=1)
+
+    # Key metrics for this product
+    st.subheader("📈 Key Metrics")
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        total_feedback = len(df)
+        st.metric("Total Reviews", total_feedback)
+
+    with col2:
+        avg_sentiment = df["sentiment_score"].mean()
+        sentiment_trend = (
+            "↗️" if avg_sentiment > 0.1 else "↘️" if avg_sentiment < -0.1 else "➡️"
+        )
+        st.metric("Average Sentiment", f"{avg_sentiment:.3f}", sentiment_trend)
+
+    with col3:
+        positive_ratio = (df["sentiment_score"] > 0.1).mean()
+        st.metric("Positive Reviews", f"{positive_ratio:.1%}")
+
+    with col4:
+        avg_confidence = df["confidence"].mean()
+        st.metric("Avg Confidence", f"{avg_confidence:.1%}")
+
+    # Sentiment distribution for this product
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("Sentiment Distribution")
+        sentiment_labels = df["sentiment_score"].apply(
+            lambda x: "Positive" if x > 0.1 else "Negative" if x < -0.1 else "Neutral"
+        )
+        sentiment_counts = sentiment_labels.value_counts()
+
+        fig = px.pie(
+            values=sentiment_counts.values,
+            names=sentiment_counts.index,
+            color_discrete_map={
+                "Positive": "green",
+                "Negative": "red",
+                "Neutral": "orange",
+            },
+            title=f"Sentiment Breakdown for {product['name']}",
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    with col2:
+        st.subheader("Sentiment Over Time")
+        if len(df) > 1:
+            # Group by date for trend analysis
+            daily_sentiment = (
+                df.set_index("timestamp").resample("D")["sentiment_score"].mean()
+            )
+
+            fig = go.Figure()
+            fig.add_trace(
+                go.Scatter(
+                    x=daily_sentiment.index,
+                    y=daily_sentiment.values,
+                    mode="lines+markers",
+                    name="Daily Average Sentiment",
+                    line=dict(color="blue"),
+                )
+            )
+            fig.update_layout(
+                title=f"Sentiment Trend for {product['name']}",
+                xaxis_title="Date",
+                yaxis_title="Sentiment Score",
+                height=400,
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("Need more reviews to show trend analysis")
+
+    # Confidence vs Sentiment scatter plot
+    st.subheader("📊 Confidence vs Sentiment Analysis")
+    fig = px.scatter(
+        df,
+        x="confidence",
+        y="sentiment_score",
+        title=f"Review Confidence vs Sentiment for {product['name']}",
+        labels={"confidence": "Confidence Score", "sentiment_score": "Sentiment Score"},
+        color="sentiment_score",
+        color_continuous_scale="RdYlGn",
+    )
+    fig.add_hline(y=0, line_dash="dash", line_color="gray", annotation_text="Neutral")
+    fig.update_layout(height=400)
+    st.plotly_chart(fig, use_container_width=True)
+
+    # Recent reviews for this product
+    st.subheader("💬 Recent Reviews")
+    recent_reviews = df.nlargest(5, "timestamp")[
+        ["feedback_text", "sentiment_score", "confidence", "timestamp", "input_method"]
+    ]
+
+    for idx, review in recent_reviews.iterrows():
+        sentiment_color = (
+            "green"
+            if review["sentiment_score"] > 0.1
+            else "red" if review["sentiment_score"] < -0.1 else "orange"
+        )
+        sentiment_label = (
+            "Positive"
+            if review["sentiment_score"] > 0.1
+            else "Negative" if review["sentiment_score"] < -0.1 else "Neutral"
+        )
+
+        with st.expander(
+            f"{sentiment_label} Review - {review['timestamp'].strftime('%Y-%m-%d %H:%M')} ({review['input_method']})"
+        ):
+            st.write(f"**Review:** {review['feedback_text']}")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write(f"**Sentiment:** {review['sentiment_score']:.3f}")
+            with col2:
+                st.write(f"**Confidence:** {review['confidence']:.1%}")
+
+    # Comparison with other products
+    st.subheader("🔍 Product Comparison")
+    all_feedback = data_manager.get_all_feedback()
+
+    if len(all_feedback) > len(product_feedback):
+        # Calculate average sentiment for all products
+        other_products_sentiment = []
+        for feedback in all_feedback:
+            if feedback["product_id"] != st.session_state.selected_product_id:
+                other_products_sentiment.append(
+                    feedback["sentiment_analysis"]["overall_sentiment"]
+                )
+
+        if other_products_sentiment:
+            avg_other_sentiment = sum(other_products_sentiment) / len(
+                other_products_sentiment
+            )
+
+            comparison_data = pd.DataFrame(
+                {
+                    "Product": [product["name"], "Other Products Average"],
+                    "Average Sentiment": [avg_sentiment, avg_other_sentiment],
+                    "Review Count": [
+                        len(product_feedback),
+                        len(other_products_sentiment),
+                    ],
+                }
+            )
+
+            fig = px.bar(
+                comparison_data,
+                x="Product",
+                y="Average Sentiment",
+                color="Average Sentiment",
+                color_continuous_scale="RdYlGn",
+                title=f"How {product['name']} Compares to Other Products",
+            )
+            fig.update_layout(height=400)
+            st.plotly_chart(fig, use_container_width=True)
+
+    # Export product-specific data
+    st.subheader("📤 Export Product Data")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("Export Product Reviews (CSV)"):
+            csv_data = df.to_csv(index=False)
+            st.download_button(
+                "Download CSV",
+                csv_data,
+                f"{product['name'].replace(' ', '_')}_reviews.csv",
+                "text/csv",
+            )
+
+    with col2:
+        if st.button("Export Product Reviews (JSON)"):
+            json_data = df.to_json(orient="records", indent=2)
+            st.download_button(
+                "Download JSON",
+                json_data,
+                f"{product['name'].replace(' ', '_')}_reviews.json",
+                "application/json",
+            )
 
 
 def data_management_page(data_manager):
@@ -405,7 +723,7 @@ def data_management_page(data_manager):
             if st.checkbox("I understand this will delete all data"):
                 data_manager.clear_all_data()
                 st.success("All data cleared!")
-                st.experimental_rerun()
+                st.rerun()
 
 
 if __name__ == "__main__":
