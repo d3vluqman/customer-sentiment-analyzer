@@ -626,46 +626,6 @@ def product_analytics_page(data_manager, product_catalog):
             with col2:
                 st.write(f"**Confidence:** {review['confidence']:.1%}")
 
-    # Comparison with other products
-    st.subheader("🔍 Product Comparison")
-    all_feedback = data_manager.get_all_feedback()
-
-    if len(all_feedback) > len(product_feedback):
-        # Calculate average sentiment for all products
-        other_products_sentiment = []
-        for feedback in all_feedback:
-            if feedback["product_id"] != st.session_state.selected_product_id:
-                other_products_sentiment.append(
-                    feedback["sentiment_analysis"]["overall_sentiment"]
-                )
-
-        if other_products_sentiment:
-            avg_other_sentiment = sum(other_products_sentiment) / len(
-                other_products_sentiment
-            )
-
-            comparison_data = pd.DataFrame(
-                {
-                    "Product": [product["name"], "Other Products Average"],
-                    "Average Sentiment": [avg_sentiment, avg_other_sentiment],
-                    "Review Count": [
-                        len(product_feedback),
-                        len(other_products_sentiment),
-                    ],
-                }
-            )
-
-            fig = px.bar(
-                comparison_data,
-                x="Product",
-                y="Average Sentiment",
-                color="Average Sentiment",
-                color_continuous_scale="RdYlGn",
-                title=f"How {product['name']} Compares to Other Products",
-            )
-            fig.update_layout(height=400)
-            st.plotly_chart(fig, use_container_width=True)
-
     # Export product-specific data
     st.subheader("📤 Export Product Data")
     col1, col2 = st.columns(2)
